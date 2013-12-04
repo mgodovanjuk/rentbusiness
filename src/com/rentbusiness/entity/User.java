@@ -19,10 +19,12 @@ public class User implements Serializable {
     private String email;
     @Column
     private String password;
-    @Embedded
+
+    @OneToOne(mappedBy = "user")
     private UserDescription userDescription;
 
-    public User() {
+    public User(){
+
     }
 
     public User(String email, String password, UserDescription userDescription) {

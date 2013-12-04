@@ -16,7 +16,7 @@ public class PersTest {
         EntityManager manager = factory.createEntityManager();
         EntityTransaction transaction = manager.getTransaction();
         transaction.begin();
-        manager.persist(new User("1","1",new UserDescription("1","1","1",new Address("1","1","1","1"),"1")));
+        //manager.persist(new User("1","1",new UserDescription("1","1","1",new Address("1","1","1","1"),"1", user)));
         transaction.commit();
         manager.close();
         factory.close();

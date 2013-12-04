@@ -1,31 +1,43 @@
 package com.rentbusiness.entity;
 
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
+import javax.jws.soap.SOAPBinding;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
  * Created by Mykhailo_Hodovaniuk on 12/2/13.
  */
-@Embeddable
+@Entity
+@Table(name = "\"UserDescription\"")
 public class UserDescription implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_description_id_seq_gen")
+    @SequenceGenerator(name = "user_description_id_seq_gen", sequenceName = "user_description_id_seq")
+    private Long id;
+    @Column
     private String companyName;
+    @Column
     private String phone;
+    @Column
     private String contactPersonName;
     @Embedded
     private Address address;
+    @Column
     private String details;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public UserDescription() {
     }
 
-    public UserDescription(String companyName, String phone, String contactPersonName, Address address, String details) {
+    public UserDescription(String companyName, String phone, String contactPersonName, Address address, String details, User user) {
         this.companyName = companyName;
         this.phone = phone;
         this.contactPersonName = contactPersonName;
         this.address = address;
         this.details = details;
+        this.user = user;
     }
 
     public String getCompanyName() {
@@ -66,5 +78,21 @@ public class UserDescription implements Serializable {
 
     public void setDetails(String details) {
         this.details = details;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
